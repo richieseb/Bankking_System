@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Transaction History</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f5f6fa; padding: 40px; color: #2c3e50; }
+        .history-container { max-width: 600px; background: white; margin: 0 auto; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h2 { margin-top: 0; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #dcdde1; }
+        th { background-color: #f8f9fa; }
+        .txt-deposit { color: #2ecc71; font-weight: bold; }
+        .txt-withdraw { color: #e67e22; font-weight: bold; }
+        .back-link { display: inline-block; margin-top: 20px; color: #3498db; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="history-container">
+        <h2>Transaction History Ledger</h2>
+        
+        <table th:if="${not #lists.isEmpty(transactions)}">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="tx : ${transactions}">
+                    <td th:text="${tx.type}" th:class="${tx.type == 'DEPOSIT' ? 'txt-deposit' : 'txt-withdraw'}"></td>
+                    <td>₹<span th:text="${tx.amount}"></span></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p th:if="${#lists.isEmpty(transactions)}" style="color: #7f8c8d; text-align: center; margin-top: 20px;">
+            No transactions found on this account session yet.
+        </p>
+
+        <a href="/dashboard" class="back-link">🔙 Back to Dashboard</a>
+    </div>
+</body>
+</html>
