@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Account Created Successfully</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f5f6fa; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 400px; text-align: center; }
+        h2 { color: #2ecc71; margin-bottom: 10px; }
+        .data-item { font-size: 18px; margin: 15px 0; color: #2c3e50; text-align: left; background: #f8f9fa; padding: 12px; border-left: 4px solid #2ecc71; }
+        a { display: inline-block; margin-top: 25px; padding: 12px 25px; background: #3498db; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Account Created Successfully! 🎉</h2>
+        <p style="color: #7f8c8d;">Please note down your system-generated account number below:</p>
+        <div class="data-item"><strong>Account Number:</strong> <span th:text="${accountNumber}"></span></div>
+        <div class="data-item"><strong>Account Holder:</strong> <span th:text="${name}"></span></div>
+        <div class="data-item"><strong>Opening Balance:</strong> ₹<span th:text="${balance}"></span></div>
+        <a href="/">Back to Home / Login</a>
+    </div>
+</body>
+</html>
