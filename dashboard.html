@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer Dashboard</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f5f6fa; margin: 0; padding: 40px; color: #2c3e50; }
+        .dashboard-container { max-width: 600px; background: white; margin: 0 auto; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; }
+        .logout-btn { position: absolute; top: 30px; right: 30px; padding: 8px 15px; background: #e74c3c; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; }
+        h1 { margin-top: 0; color: #2c3e50; }
+        .balance-box { background: #ebf3f9; padding: 20px; border-radius: 8px; border-left: 5px solid #3498db; margin: 20px 0; }
+        .balance-box h2 { margin: 0; color: #2980b9; }
+        .action-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid #dcdde1; }
+        input[type="number"] { width: 70%; padding: 10px; border: 1px solid #dcdde1; border-radius: 6px; margin-right: 10px; }
+        .btn { padding: 10px 20px; border: none; color: white; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .success-banner { color: #2ecc71; font-weight: bold; margin: 10px 0; }
+        .error-banner { color: #e74c3c; font-weight: bold; margin: 10px 0; }
+        .nav-link { display: block; margin-top: 25px; text-align: center; color: #3498db; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <a href="/logout" class="logout-btn">Logout</a>
+        <h1>Welcome, <span th:text="${account.fullName}"></span>!</h1>
+        <p><strong>Account Number:</strong> <span th:text="${account.accountNumber}"></span></p>
+        
+        <div class="balance-box">
+            <p style="margin: 0 0 5px 0; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; color: #7f8c8d;">Available Balance</p>
+            <h2>₹<span th:text="${account.balance}"></span></h2>
+        </div>
+
+        <div th:if="${message}" class="success-banner" th:text="${message}"></div>
+        <div th:if="${error}" class="error-banner" th:text="${error}"></div>
+
+        <div class="action-section">
+            <h3>Deposit Money</h3>
+            <form action="/deposit" method="POST">
+                <input type="number" name="amount" step="0.01" placeholder="Enter amount to deposit" required />
+                <button type="submit" class="btn" style="background: #2ecc71;">Deposit</button>
+            </form>
+        </div>
+
+        <div class="action-section">
+            <h3>Withdraw Money</h3>
+            <form action="/withdraw" method="POST">
+                <input type="number" name="amount" step="0.01" placeholder="Enter amount to withdraw" required />
+                <button type="submit" class="btn" style="background: #e67e22;">Withdraw</button>
+            </form>
+        </div>
+
+        <a href="/transaction-history" class="nav-link">📊 View Transaction History Ledger</a>
+    </div>
+</body>
+</html>
